@@ -1,22 +1,92 @@
+import { FC } from "react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { shallow } from "zustand/shallow";
+import { useGlobalState } from "../../state/useGlobalState";
 import NewsStyleContainer from "./NewsStyleContainer";
 
-const News = () => {
+import { Autoplay } from "swiper/modules";
+
+const News: FC = () => {
+  const { stockData } = useGlobalState((state) => {
+    return { stockData: state.stockData };
+  }, shallow);
+
   return (
     <NewsStyleContainer>
-      <div className="news-summary">
-        <h1>Article1</h1>
-        <p>This is Article1.</p>
-      </div>
-      <div className="news-sentiment">
-        <div className="sentiment-score">
-          <p>Score: </p>
-          <label className="score">0.67</label>
-        </div>
-        <div className="sentiment-value">
-          <p>Value: </p>
-          <label className="value">positive</label>
-        </div>
-      </div>
+      <Swiper
+        className="mySwiper"
+        modules={[Autoplay]}
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 3500,
+          disableOnInteraction: false,
+        }}
+      >
+        <SwiperSlide>
+          <div className="news-summary">
+            <h1>Article 1</h1>
+            <p>{stockData.news.article1.summary}.</p>
+          </div>
+          <div className="news-sentiment">
+            <div className="sentiment-score">
+              <p>Score: </p>
+              <label className="score">
+                {stockData.news.article1.sentiment.score}
+              </label>
+            </div>
+            <div className="sentiment-value">
+              <p>Value: </p>
+              <label className="value">
+                {stockData.news.article1.sentiment.value}
+              </label>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="news-summary">
+            <h1>Article 2</h1>
+            <p>{stockData.news.article2.summary}.</p>
+          </div>
+          <div className="news-sentiment">
+            <div className="sentiment-score">
+              <p>Score: </p>
+              <label className="score">
+                {stockData.news.article2.sentiment.score}
+              </label>
+            </div>
+            <div className="sentiment-value">
+              <p>Value: </p>
+              <label className="value">
+                {stockData.news.article2.sentiment.value}
+              </label>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="news-summary">
+            <h1>Article 3</h1>
+            <p>{stockData.news.article3.summary}.</p>
+          </div>
+          <div className="news-sentiment">
+            <div className="sentiment-score">
+              <p>Score: </p>
+              <label className="score">
+                {stockData.news.article3.sentiment.score}
+              </label>
+            </div>
+            <div className="sentiment-value">
+              <p>Value: </p>
+              <label className="value">
+                {stockData.news.article3.sentiment.value}
+              </label>
+            </div>
+          </div>
+        </SwiperSlide>
+      </Swiper>
     </NewsStyleContainer>
   );
 };

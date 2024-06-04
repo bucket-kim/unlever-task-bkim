@@ -1,35 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { shallow } from "zustand/shallow";
 import AppStyleContainer from "./AppStyleContainer";
 import AnalystEstimate from "./components/AnalystEstimate/AnalystEstimate";
 import CandleStickChart from "./components/Chart/CandleStickChart";
 import KeyRatio from "./components/KeyRatio/KeyRatio";
 import News from "./components/News/News";
+import { useGlobalState } from "./state/useGlobalState";
 
 function App() {
-  const [data, setData] = useState<any>({});
+  const { stockData, setStockData } = useGlobalState((state) => {
+    return {
+      stockData: state.stockData,
+      setStockData: state.setStockData,
+    };
+  }, shallow);
 
   useEffect(() => {
     fetch("/financialConfig.json")
       .then((res) => res.json())
-      .then((data) => setData(data))
+      .then((data) => {
+        setStockData(data);
+      })
       .catch((error) => console.log(error));
   }, []);
-  useEffect(() => {
-    if (!data) return;
-    console.log(data);
-  }, [data]);
 
   return (
-    <AppStyleContainer>
-      <div className="right-container">
-        <CandleStickChart tickerTitle={data.ticker} />
-        <KeyRatio data={data} />
-      </div>
-      <div className="left-container">
-        <News />
-        <AnalystEstimate />
-      </div>
-    </AppStyleContainer>
+    stockData && (
+      <AppStyleContainer>
+        <div className="right-container">
+          <CandleStickChart tickerTitle={stockData.ticker} />
+          <KeyRatio data={stockData} />
+        </div>
+        <div className="left-container">
+          <News />
+          <AnalystEstimate data={stockData} />
+        </div>
+      </AppStyleContainer>
+    )
   );
 }
 
