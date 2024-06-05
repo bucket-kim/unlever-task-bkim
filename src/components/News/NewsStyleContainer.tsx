@@ -23,15 +23,27 @@ const NewsStyleContainer = styled.div`
     flex-direction: column;
     /* align-items: center; */
     justify-content: space-between;
+    cursor: pointer;
   }
 
   .news-summary {
+    h1 {
+      margin: 0;
+    }
+    p {
+      margin: 0;
+    }
   }
 
   .news-sentiment {
     .sentiment-score,
     .sentiment-value {
+      p {
+        margin: 0;
+      }
+      height: 1.5rem;
       display: flex;
+      align-items: center;
       justify-content: space-between;
     }
   }

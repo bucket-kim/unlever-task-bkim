@@ -25,11 +25,21 @@ const options: ApexOptions = {
     zoom: {
       enabled: false,
     },
+    dropShadow: {
+      enabled: true,
+      color: "#000",
+      top: 18,
+      left: 7,
+      blur: 10,
+      opacity: 0.2,
+    },
     toolbar: {
       autoSelected: "pan",
       show: false,
     },
   },
+  colors: ["#3a399c"],
+
   dataLabels: {
     enabled: false,
   },

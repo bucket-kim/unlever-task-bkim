@@ -31,12 +31,13 @@ const AnalystEstimateStyleContainer = styled.div`
 
     ul {
       border-radius: 1rem;
-      background: #d1d1d1;
+      background: #3a399c;
       overflow: hidden;
       li {
         list-style: none;
         cursor: pointer;
         padding: 1rem 1.5rem;
+        color: white;
         border-bottom: white solid 2px;
       }
     }

@@ -1,6 +1,4 @@
 import { FC } from "react";
-import { shallow } from "zustand/shallow";
-import { useGlobalState } from "../../state/useGlobalState";
 import KeyRatioStyleContainer from "./KeyRatioStyleContainer";
 import RatioLabel from "./RatioLabel";
 
@@ -9,11 +7,6 @@ interface dataProps {
 }
 
 const KeyRatio: FC<dataProps> = ({ data }) => {
-  const { stockData } = useGlobalState((state) => {
-    return {
-      stockData: state.stockData,
-    };
-  }, shallow);
   return (
     <KeyRatioStyleContainer>
       <RatioLabel ratioTitle="Market Cap" data={data.market_ap} />

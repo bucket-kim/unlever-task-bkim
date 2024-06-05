@@ -10,8 +10,8 @@ import NewsStyleContainer from "./NewsStyleContainer";
 import { Autoplay } from "swiper/modules";
 
 const News: FC = () => {
-  const { stockData } = useGlobalState((state) => {
-    return { stockData: state.stockData };
+  const { stockData, setArticle } = useGlobalState((state) => {
+    return { stockData: state.stockData, setArticle: state.setArticle };
   }, shallow);
 
   return (
@@ -26,7 +26,7 @@ const News: FC = () => {
           disableOnInteraction: false,
         }}
       >
-        <SwiperSlide>
+        <SwiperSlide onClick={() => setArticle("article01")}>
           <div className="news-summary">
             <h1>Article 1</h1>
             <p>{stockData.news.article1.summary}.</p>
@@ -46,7 +46,7 @@ const News: FC = () => {
             </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide onClick={() => setArticle("article02")}>
           <div className="news-summary">
             <h1>Article 2</h1>
             <p>{stockData.news.article2.summary}.</p>
@@ -66,7 +66,7 @@ const News: FC = () => {
             </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide onClick={() => setArticle("article03")}>
           <div className="news-summary">
             <h1>Article 3</h1>
             <p>{stockData.news.article3.summary}.</p>

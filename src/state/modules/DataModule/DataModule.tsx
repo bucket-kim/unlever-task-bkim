@@ -1,6 +1,6 @@
 import { globalStateApiType } from "../../GlobalStateTypes";
 
-const DataModule = ({ set, get }: globalStateApiType) => {
+const DataModule = ({ set }: globalStateApiType) => {
   return {
     stockData: null,
     setStockData: (stockData: any) => {
