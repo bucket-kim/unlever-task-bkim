@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const NewsStyleContainer = styled.div`
-  width: 300px;
+  width: 324px;
   height: 180px;
   display: flex;
   flex-direction: column;
@@ -54,7 +54,7 @@ const NewsStyleContainer = styled.div`
     height: 160px;
   }
   @media only screen and (max-width: 460px) {
-    width: 300px;
+    width: 326px;
     height: 120px;
     .swiper {
       padding: 0.5rem 1.5rem;

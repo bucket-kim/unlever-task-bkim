@@ -7,7 +7,8 @@ const AnalystEstimateStyleContainer = styled.div`
   background: white;
   box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.2);
   position: relative;
-  opacity: 0;
+  width: 324px;
+  /* opacity: 0; */
 
   button {
     position: absolute;
