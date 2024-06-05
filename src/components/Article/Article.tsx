@@ -73,9 +73,9 @@ const Article = () => {
             modi vel eaque?
           </p>
         </div>
-        <div className="sentimen">
-          <p>{score}</p>
-          <p>{value}</p>
+        <div className="sentiment">
+          <p>Score: {score}</p>
+          <p>Value: {value}</p>
         </div>
       </div>
     </ArticleStyleContainer>

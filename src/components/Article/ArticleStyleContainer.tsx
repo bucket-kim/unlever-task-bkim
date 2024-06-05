@@ -16,14 +16,48 @@ const ArticleStyleContainer = styled.div`
   visibility: hidden;
 
   .article-container {
+    position: relative;
     width: 52rem;
     height: 28rem;
     background: white;
     padding: 3rem;
     border-radius: 2rem;
+    box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.2);
+
+    .article-paragraph {
+      margin-top: 2rem;
+      p {
+        font-size: 1.5rem;
+      }
+    }
+
+    button {
+      position: absolute;
+      right: 2rem;
+      border: none;
+      background: #948cf1;
+      color: white;
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
 
     h1 {
       margin: 0;
+      font-size: 3.6rem;
+    }
+    .sentiment {
+      margin: 0;
+      position: absolute;
+      bottom: 0;
+      left: 2rem;
+      display: flex;
+      flex-direction: column;
+      p {
+        font-size: 1.25rem;
+      }
     }
   }
 `;
