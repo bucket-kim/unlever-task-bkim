@@ -55,9 +55,15 @@ const Geo = (props: JSX.IntrinsicElements["group"]) => {
 
   useEffect(() => {
     if (!graphRef.current || !pieRef.current) return;
-    if (size.width <= 1024) {
+    if (size.width <= 1024 && size.width > 440) {
       graphRef.current.position.x = -3;
       pieRef.current.position.x = 3;
+    } else if (size.width <= 440) {
+      graphRef.current.position.x = -1.75;
+      pieRef.current.position.x = 1.75;
+    } else {
+      graphRef.current.position.x = -5;
+      pieRef.current.position.x = 5;
     }
   }, [size]);
 

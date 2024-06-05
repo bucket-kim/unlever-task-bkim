@@ -60,6 +60,26 @@ const ArticleStyleContainer = styled.div`
       }
     }
   }
+
+  @media only screen and (max-width: 460px) {
+    .article-container {
+      padding: 1.5rem;
+      border-radius: 1rem;
+      .article-paragraph {
+        p {
+          font-size: 1.2rem;
+        }
+      }
+      h1 {
+        font-size: 2.6rem;
+      }
+      .sentiment {
+        p {
+          font-size: rem;
+        }
+      }
+    }
+  }
 `;
 
 export default ArticleStyleContainer;
