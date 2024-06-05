@@ -5,7 +5,7 @@ import { useGlobalState } from "../../state/useGlobalState";
 import LoadingStyleContainer from "./LoadingStyleContainer";
 
 const Loading = () => {
-  const { progress } = useProgress();
+  const { loaded, total } = useProgress();
 
   const { setLoadingDone } = useGlobalState((state) => {
     return {
@@ -17,7 +17,7 @@ const Loading = () => {
 
   const handleAnimation = useCallback(() => {
     if (!loaderRef.current) return;
-    if (progress >= 100) {
+    if (loaded === total) {
       gsap.fromTo(
         loaderRef.current,
         { opacity: 1 },
@@ -31,7 +31,7 @@ const Loading = () => {
         },
       );
     }
-  }, [progress]);
+  }, [loaded]);
 
   useEffect(handleAnimation, [handleAnimation]);
 

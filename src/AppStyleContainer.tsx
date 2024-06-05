@@ -4,30 +4,70 @@ const AppStyleContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  /* background: rgb(0, 9, 62); */
-  /* background-image: linear-gradient(135deg, #f9f9f9 0%, #d6dfe8 100%); */
-  /* background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 2;
+  overflow-x: hidden;
   /* pointer-events: none; */
   .header {
+    width: 100%;
+    text-align: center;
+    /* position: absolute; */
     margin: 0;
-    position: absolute;
-    top: 2rem;
     color: #948cf1;
     font-size: 5rem;
   }
+  .container {
+    /* height: 100%; */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
-  .right-container {
-    margin-top: 4rem;
+    .right-container {
+      margin-top: 4rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .left-container {
+      height: 100%;
+      margin-top: 4rem;
+      margin-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
   }
-  .left-container {
-    margin-top: 4rem;
-    margin-left: 2rem;
+
+  @media only screen and (max-width: 1024px) {
+    .container {
+      height: 100%;
+    }
+  }
+  @media only screen and (max-width: 460px) {
+    .header {
+      font-size: 2.25rem;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 8rem;
+      height: 100%;
+      .right-container {
+        margin-top: 0rem;
+      }
+      .left-container {
+        margin-top: 2rem;
+        margin-left: 0rem;
+      }
+    }
   }
 `;
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const KeyRatioStyleContainer = styled.div`
-  opacity: 0;
+  /* opacity: 0; */
   margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -20,6 +20,11 @@ const KeyRatioStyleContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.2);
+
+    p {
+      width: 100%;
+      margin: 0;
+    }
 
     span {
       font-weight: 800;
@@ -51,6 +56,30 @@ const KeyRatioStyleContainer = styled.div`
   }
   .ratio-label:nth-child(9) {
     grid-area: 3 / 3 / 4 / 4;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .ratio-label {
+      width: 9.2rem;
+      height: 2rem;
+    }
+  }
+  @media only screen and (max-width: 460px) {
+    .ratio-label {
+      width: 6rem;
+      height: 1.5rem;
+      margin: 0.2rem;
+      padding: 0.8rem;
+
+      p {
+        width: 5rem;
+        font-size: 0.8rem;
+      }
+
+      span {
+        font-size: 0.8rem;
+      }
+    }
   }
 `;
 

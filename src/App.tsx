@@ -1,6 +1,6 @@
-import gsap from "gsap";
-import { Fragment, Suspense, useEffect, useRef } from "react";
+import { Fragment, Suspense, useCallback, useEffect, useRef } from "react";
 import { shallow } from "zustand/shallow";
+import { appAnimationHandle } from "./AppAnimationLogic";
 import AppStyleContainer from "./AppStyleContainer";
 import AnalystEstimate from "./components/AnalystEstimate/AnalystEstimate";
 import Article from "./components/Article/Article";
@@ -34,7 +34,7 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
-  useEffect(() => {
+  const AnimationHandle = useCallback(() => {
     if (
       !chartRef.current ||
       !ratioRef.current ||
@@ -43,23 +43,15 @@ function App() {
     )
       return;
     loadingDone &&
-      gsap.fromTo(
-        [
-          chartRef.current,
-          ratioRef.current,
-          newsRef.current,
-          analystRef.current,
-        ],
-        {
-          opacity: 0,
-        },
-        {
-          opacity: 1,
-          delay: 0.5,
-          stagger: 0.15,
-        },
+      appAnimationHandle(
+        chartRef.current,
+        ratioRef.current,
+        newsRef.current,
+        analystRef.current,
       );
   }, [loadingDone]);
+
+  useEffect(AnimationHandle, [AnimationHandle]);
 
   return (
     <Fragment>
@@ -69,13 +61,18 @@ function App() {
         {stockData && (
           <AppStyleContainer>
             <h1 className="header">UNLEVERED STOCK</h1>
-            <div className="right-container">
-              <CandleStickChart tickerTitle={stockData.ticker} ref={chartRef} />
-              <KeyRatio data={stockData} ref={ratioRef} />
-            </div>
-            <div className="left-container">
-              <News ref={newsRef} />
-              <AnalystEstimate data={stockData} ref={analystRef} />
+            <div className="container">
+              <div className="right-container">
+                <CandleStickChart
+                  tickerTitle={stockData.ticker}
+                  ref={chartRef}
+                />
+                <KeyRatio data={stockData} ref={ratioRef} />
+              </div>
+              <div className="left-container">
+                <News ref={newsRef} />
+                <AnalystEstimate data={stockData} ref={analystRef} />
+              </div>
             </div>
             <Article />
           </AppStyleContainer>

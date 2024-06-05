@@ -1,6 +1,11 @@
 import { Float, useGLTF } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import gsap from "gsap";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
+import { shallow } from "zustand/shallow";
+import { useGlobalState } from "../../state/useGlobalState";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -19,6 +24,42 @@ type GLTFResult = GLTF & {
 
 const Geo = (props: JSX.IntrinsicElements["group"]) => {
   const { nodes } = useGLTF("/models/geo.glb") as GLTFResult;
+
+  const size = useThree((state) => state.size);
+
+  const graphRef = useRef<THREE.Group>(null);
+  const pieRef = useRef<THREE.Group>(null);
+
+  const { loadingDone } = useGlobalState((state) => {
+    return {
+      loadingDone: state.loadingDone,
+    };
+  }, shallow);
+
+  useEffect(() => {
+    if (!graphRef.current || !pieRef.current) return;
+    loadingDone &&
+      gsap.fromTo(
+        [graphRef.current.scale, pieRef.current.scale],
+        { x: 0, y: 0, z: 0 },
+        {
+          x: 1.5,
+          y: 1.5,
+          z: 1.5,
+          ease: "power1.inOut",
+          stagger: 0.2,
+          delay: 0.3,
+        },
+      );
+  }, [loadingDone]);
+
+  useEffect(() => {
+    if (!graphRef.current || !pieRef.current) return;
+    if (size.width <= 1024) {
+      graphRef.current.position.x = -3;
+      pieRef.current.position.x = 3;
+    }
+  }, [size]);
 
   const blackMat = new THREE.MeshStandardMaterial({
     color: "#adadad",
@@ -66,7 +107,8 @@ const Geo = (props: JSX.IntrinsicElements["group"]) => {
         <group
           position={[-5, -1, 0]}
           rotation={[0, Math.PI / 1.5, 0]}
-          scale={1.5}
+          scale={0}
+          ref={graphRef}
         >
           <mesh
             name="Graph_Geo"
@@ -94,7 +136,8 @@ const Geo = (props: JSX.IntrinsicElements["group"]) => {
         <group
           position={[5, 0.5, 0]}
           rotation={[0, Math.PI / 0.45, 0]}
-          scale={1.5}
+          scale={0}
+          ref={pieRef}
         >
           {/* {Array.from({ length: 5 }).map((_, idx) => (
             <mesh

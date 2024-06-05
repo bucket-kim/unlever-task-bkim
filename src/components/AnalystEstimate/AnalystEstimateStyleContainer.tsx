@@ -7,7 +7,7 @@ const AnalystEstimateStyleContainer = styled.div`
   background: white;
   box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.2);
   position: relative;
-  opacity: 0;
+  /* opacity: 0; */
 
   button {
     position: absolute;
@@ -50,6 +50,19 @@ const AnalystEstimateStyleContainer = styled.div`
     justify-content: space-between;
     span {
       font-size: 1.5rem;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .ticker-lists {
+      top: -1rem;
+    }
+  }
+  @media only screen and (max-width: 460px) {
+    margin-top: 4rem;
+
+    .ticker-lists {
+      top: -1rem;
     }
   }
 `;

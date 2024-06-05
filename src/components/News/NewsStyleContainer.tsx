@@ -8,7 +8,7 @@ const NewsStyleContainer = styled.div`
   /* align-items: center; */
   justify-content: space-between;
   /* overflow: hidden; */
-  opacity: 0;
+  /* opacity: 0; */
 
   .swiper {
     border-radius: 2rem;
@@ -17,6 +17,7 @@ const NewsStyleContainer = styled.div`
     width: 100%;
     height: 100%;
     box-shadow: 0rem 0rem 0.5rem 0.1rem rgba(0, 0, 0, 0.2);
+    margin-left: -1.5rem;
   }
 
   .swiper-slide {
@@ -46,6 +47,17 @@ const NewsStyleContainer = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 300px;
+    height: 160px;
+  }
+  @media only screen and (max-width: 460px) {
+    width: 300px;
+    height: 120px;
+    .swiper {
+      padding: 0.5rem 1.5rem;
     }
   }
 `;

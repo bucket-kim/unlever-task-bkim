@@ -1,6 +1,6 @@
-import gsap from "gsap";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import { handleAnalystAnimation } from "./AnalystEstimateAnimation";
 import AnalystEstimateStyleContainer from "./AnalystEstimateStyleContainer";
 import { options, series001, series002, series003 } from "./config";
 
@@ -20,6 +20,7 @@ export type Ref = HTMLDivElement;
 const AnalystEstimate = forwardRef<Ref, AnalystProps>(({ data }, ref) => {
   const [buttonText, setButtonText] = useState("Citibank");
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [chartHeight, setChartHeight] = useState(300);
 
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -30,22 +31,7 @@ const AnalystEstimate = forwardRef<Ref, AnalystProps>(({ data }, ref) => {
   const listOpenAnimation = useCallback(() => {
     if (!listRef.current) return;
 
-    if (openMenu) {
-      gsap.to(listRef.current, {
-        visibility: "visible",
-        opacity: 1,
-        duration: 0.2,
-      });
-    } else {
-      gsap.to(listRef.current, {
-        opacity: 0,
-        duration: 0.2,
-        onComplete: () => {
-          if (!listRef.current) return;
-          listRef.current.style.visibility = "hidden";
-        },
-      });
-    }
+    handleAnalystAnimation(listRef.current, openMenu);
   }, [openMenu]);
 
   useEffect(listOpenAnimation, [listOpenAnimation]);
@@ -59,6 +45,15 @@ const AnalystEstimate = forwardRef<Ref, AnalystProps>(({ data }, ref) => {
       setOpenMenu(false);
     }
   }, [buttonText]);
+
+  useEffect(() => {
+    if (window.innerWidth <= 1024) {
+      setChartHeight(260);
+    }
+    if (window.innerWidth <= 460) {
+      setChartHeight(160);
+    }
+  }, []);
 
   return (
     <AnalystEstimateStyleContainer ref={ref}>
@@ -80,7 +75,7 @@ const AnalystEstimate = forwardRef<Ref, AnalystProps>(({ data }, ref) => {
         <ReactApexChart
           options={chartOptions.options}
           series={chartOptions.series001}
-          height={300}
+          height={chartHeight}
           type="line"
         />
       )}
@@ -88,7 +83,7 @@ const AnalystEstimate = forwardRef<Ref, AnalystProps>(({ data }, ref) => {
         <ReactApexChart
           options={chartOptions.options}
           series={chartOptions.series002}
-          height={300}
+          height={chartHeight}
           type="line"
         />
       )}
@@ -96,7 +91,7 @@ const AnalystEstimate = forwardRef<Ref, AnalystProps>(({ data }, ref) => {
         <ReactApexChart
           options={chartOptions.options}
           series={chartOptions.series003}
-          height={300}
+          height={chartHeight}
           type="line"
         />
       )}
