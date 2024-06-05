@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const CandleStickChartStyleContainer = styled.div`
-  /* opacity: 0; */
+  opacity: 0;
 
   .chart-content {
     padding: 2rem;
