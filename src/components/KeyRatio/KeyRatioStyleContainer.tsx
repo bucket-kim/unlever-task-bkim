@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 const KeyRatioStyleContainer = styled.div`
-  /* width: 1080px;
-  height: 180px; */
+  opacity: 0;
   margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

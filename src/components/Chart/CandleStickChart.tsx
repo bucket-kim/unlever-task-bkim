@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { forwardRef } from "react";
 import ReactApexChart from "react-apexcharts";
 import CandleStickChartStyleContainer from "./CandleStickChartStyleContainer";
 import { data, options } from "./config";
@@ -6,6 +6,8 @@ import { data, options } from "./config";
 interface MyComponentProps {
   tickerTitle: string;
 }
+
+export type Ref = HTMLDivElement;
 
 const chartOptions = {
   series: [
@@ -15,19 +17,21 @@ const chartOptions = {
   ],
   options,
 };
-const CandleStickChart: FC<MyComponentProps> = ({ tickerTitle }) => {
-  return (
-    <CandleStickChartStyleContainer>
-      <h1>{tickerTitle}</h1>
-      <ReactApexChart
-        options={chartOptions.options}
-        series={chartOptions.series}
-        type="candlestick"
-        height={320}
-        width={720}
-      />
-    </CandleStickChartStyleContainer>
-  );
-};
+const CandleStickChart = forwardRef<Ref, MyComponentProps>(
+  ({ tickerTitle }, ref) => {
+    return (
+      <CandleStickChartStyleContainer ref={ref}>
+        <h1>{tickerTitle}</h1>
+        <ReactApexChart
+          options={chartOptions.options}
+          series={chartOptions.series}
+          type="candlestick"
+          height={320}
+          width={720}
+        />
+      </CandleStickChartStyleContainer>
+    );
+  },
+);
 
 export default CandleStickChart;

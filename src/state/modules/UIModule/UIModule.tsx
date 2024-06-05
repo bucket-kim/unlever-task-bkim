@@ -6,6 +6,11 @@ const UIModule = ({ set }: globalStateApiType) => {
     setArticle: (article: any) => {
       set({ article: article });
     },
+
+    loadingDone: false,
+    setLoadingDone: (loadingDone: boolean) => {
+      set({ loadingDone: loadingDone });
+    },
   };
 };
 

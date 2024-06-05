@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { forwardRef } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -9,13 +9,17 @@ import NewsStyleContainer from "./NewsStyleContainer";
 
 import { Autoplay } from "swiper/modules";
 
-const News: FC = () => {
+interface newsProps {}
+
+export type Ref = HTMLDivElement;
+
+const News = forwardRef<Ref, newsProps>(({ ...props }, ref) => {
   const { stockData, setArticle } = useGlobalState((state) => {
     return { stockData: state.stockData, setArticle: state.setArticle };
   }, shallow);
 
   return (
-    <NewsStyleContainer>
+    <NewsStyleContainer ref={ref} {...props}>
       <Swiper
         className="mySwiper"
         modules={[Autoplay]}
@@ -26,7 +30,7 @@ const News: FC = () => {
           disableOnInteraction: false,
         }}
       >
-        <SwiperSlide onClick={() => setArticle("article01")}>
+        <SwiperSlide onClick={() => setArticle("article1")}>
           <div className="news-summary">
             <h1>Article 1</h1>
             <p>{stockData.news.article1.summary}.</p>
@@ -46,7 +50,7 @@ const News: FC = () => {
             </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide onClick={() => setArticle("article02")}>
+        <SwiperSlide onClick={() => setArticle("article2")}>
           <div className="news-summary">
             <h1>Article 2</h1>
             <p>{stockData.news.article2.summary}.</p>
@@ -66,7 +70,7 @@ const News: FC = () => {
             </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide onClick={() => setArticle("article03")}>
+        <SwiperSlide onClick={() => setArticle("article3")}>
           <div className="news-summary">
             <h1>Article 3</h1>
             <p>{stockData.news.article3.summary}.</p>
@@ -89,6 +93,6 @@ const News: FC = () => {
       </Swiper>
     </NewsStyleContainer>
   );
-};
+});
 
 export default News;

@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import AnalystEstimateStyleContainer from "./AnalystEstimateStyleContainer";
 import { options, series001, series002, series003 } from "./config";
@@ -15,7 +15,9 @@ interface AnalystProps {
   data: any;
 }
 
-const AnalystEstimate: FC<AnalystProps> = ({ data }) => {
+export type Ref = HTMLDivElement;
+
+const AnalystEstimate = forwardRef<Ref, AnalystProps>(({ data }, ref) => {
   const [buttonText, setButtonText] = useState("Citibank");
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
@@ -59,7 +61,7 @@ const AnalystEstimate: FC<AnalystProps> = ({ data }) => {
   }, [buttonText]);
 
   return (
-    <AnalystEstimateStyleContainer>
+    <AnalystEstimateStyleContainer ref={ref}>
       <button onClick={handleButtonClick}>Choose Ticker</button>
       <div className="ticker-lists" ref={listRef}>
         <ul>
@@ -100,6 +102,6 @@ const AnalystEstimate: FC<AnalystProps> = ({ data }) => {
       )}
     </AnalystEstimateStyleContainer>
   );
-};
+});
 
 export default AnalystEstimate;

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { forwardRef } from "react";
 import KeyRatioStyleContainer from "./KeyRatioStyleContainer";
 import RatioLabel from "./RatioLabel";
 
@@ -6,9 +6,11 @@ interface dataProps {
   data: any;
 }
 
-const KeyRatio: FC<dataProps> = ({ data }) => {
+export type Ref = HTMLDivElement;
+
+const KeyRatio = forwardRef<Ref, dataProps>(({ data }, ref) => {
   return (
-    <KeyRatioStyleContainer>
+    <KeyRatioStyleContainer ref={ref}>
       <RatioLabel ratioTitle="Market Cap" data={data.market_ap} />
       <RatioLabel
         ratioTitle="Shares Outstanding"
@@ -26,6 +28,6 @@ const KeyRatio: FC<dataProps> = ({ data }) => {
       <RatioLabel ratioTitle="EPS" data={data.eps} />
     </KeyRatioStyleContainer>
   );
-};
+});
 
 export default KeyRatio;

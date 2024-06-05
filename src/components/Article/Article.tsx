@@ -5,10 +5,11 @@ import { useGlobalState } from "../../state/useGlobalState";
 import ArticleStyleContainer from "./ArticleStyleContainer";
 
 const Article = () => {
-  const { article, setArticle } = useGlobalState((state) => {
+  const { article, setArticle, stockData } = useGlobalState((state) => {
     return {
       article: state.article,
       setArticle: state.setArticle,
+      stockData: state.stockData,
     };
   }, shallow);
 
@@ -36,28 +37,22 @@ const Article = () => {
       });
     }
   }, [article]);
+
   useEffect(() => {
-    switch (article) {
-      case "article01":
-        seTitle("Article 1");
-        setSummary("This is Article 1");
-        setScore("0.9");
-        setValue("positive");
-        break;
-      case "article02":
-        seTitle("Article 2");
-        setSummary("This is Article 2");
-        setScore("0.67");
-        setValue("negative");
-        break;
-      case "article03":
-        seTitle("Article 3");
-        setSummary("This is Article 3");
-        setScore("0.559");
-        setValue("positive");
-        break;
-    }
-  }, [article]);
+    if (!stockData || !stockData.news) return;
+
+    const updateArticleData = (articleKey: any) => {
+      const articleData = stockData.news[articleKey];
+      if (!articleData) return;
+
+      seTitle(`Article ${articleKey.replace("article", "")}`);
+      setSummary(articleData.summary);
+      setScore(articleData.sentiment.score);
+      setValue(articleData.sentiment.value);
+    };
+
+    updateArticleData(article);
+  }, [article, stockData]);
 
   return (
     <ArticleStyleContainer ref={containerRef}>

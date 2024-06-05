@@ -12,6 +12,7 @@ const CandleStickChartStyleContainer = styled.div`
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 0.15rem solid rgba(255, 255, 255, 0.3);
+  opacity: 0;
 `;
 
 export default CandleStickChartStyleContainer;

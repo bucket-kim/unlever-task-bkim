@@ -8,6 +8,7 @@ const NewsStyleContainer = styled.div`
   /* align-items: center; */
   justify-content: space-between;
   /* overflow: hidden; */
+  opacity: 0;
 
   .swiper {
     border-radius: 2rem;
